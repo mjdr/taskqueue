@@ -1,6 +1,7 @@
 typedef int bool;
 
 #include "queue.h"
+#include "note.h"
 
 
 
@@ -31,8 +32,11 @@ int main(int argc, char* argv[]){
   Note n = getNote(0);
   printNote(&n);
  }
+ else if(!strcmp(argv[1],"finished")){
+  printf("Finished tasks : %d \n", getFinishedCount());
+ }
  else if(!strcmp(argv[1],"help")){
-  printf("Commands:\n  add\n  list\n  done\n  last\n  help\n");
+  printf("Commands:\n  add\n  list\n  done\n  last\n  finished\n  help\n");
  }
  else {
   printf("Invalid argument\n Use note help\n");

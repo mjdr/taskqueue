@@ -10,6 +10,7 @@ Note getNote(int);
 
 void printList();
 int queueSize();
+int getFinishedCount();
 
 
 int loadQueue();

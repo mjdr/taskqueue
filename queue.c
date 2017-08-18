@@ -5,16 +5,19 @@
 
 Note queue[NOTES_MAX_SIZE];
 int queueIndex;
+int finshedCount;
 
 void initQueue() {
  printf("Init new queue\n");
  queueIndex = -1;
+ finshedCount = 0;
 }
 
 void pushNote(Note note){
  queue[++queueIndex] = note;
 }
 Note popNote(){
+ finshedCount++;
  return queue[queueIndex--];
 }
 Note pullNote(){
@@ -49,6 +52,7 @@ int loadQueue() {
   return 0;
  }
  fread(&queueIndex,sizeof(int),1,f);
+ fread(&finshedCount,sizeof(int),1,f);
  fread(queue,sizeof(Note),queueIndex + 1,f);
  
  fclose(f);
@@ -64,12 +68,16 @@ void storeQueue() {
  
  f = fopen(STORE_FILE, "w");
  if(!f){
-  printf("Can not store queue");
+  printf("Can not store queue\n");
   return;
  }
  fwrite(&queueIndex,sizeof(int),1,f);
+ fwrite(&finshedCount,sizeof(int),1,f);
  fwrite(queue,sizeof(Note),queueIndex + 1,f);
  
  fclose(f);
+}
+int getFinishedCount(){
+ return finshedCount;
 }
 
